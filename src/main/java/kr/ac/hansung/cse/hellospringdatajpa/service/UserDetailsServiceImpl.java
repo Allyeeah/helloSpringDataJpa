@@ -1,7 +1,14 @@
+package kr.ac.hansung.cse.hellospringdatajpa.service;
 import kr.ac.hansung.cse.hellospringdatajpa.entity.User;
 import kr.ac.hansung.cse.hellospringdatajpa.repo.UserRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+
+
 
 @Service
 @RequiredArgsConstructor
