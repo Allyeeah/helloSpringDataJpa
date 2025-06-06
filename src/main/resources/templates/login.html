@@ -5,51 +5,93 @@
     <title>Login</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Segoe UI', sans-serif;
+            background: #f0f2f5;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .form-container {
+            background: white;
             padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            width: 350px;
         }
-        form {
-            margin-top: 20px;
+
+        h2 {
+            text-align: center;
+            margin-bottom: 24px;
         }
+
         label {
             display: block;
-            margin-bottom: 10px;
+            margin-bottom: 12px;
         }
+
+        input[type="text"],
+        input[type="password"] {
+            width: 100%;
+            padding: 10px;
+            margin-top: 6px;
+            margin-bottom: 16px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+        }
+
         button {
-            margin-top: 10px;
+            width: 100%;
+            padding: 12px;
+            background-color: #4a90e2;
+            border: none;
+            color: white;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 16px;
         }
-        .message {
-            margin-top: 15px;
-            font-weight: bold;
+
+        button:hover {
+            background-color: #3a7bd5;
+        }
+
+        .msg {
+            margin-top: 12px;
+            text-align: center;
+        }
+
+        .msg a {
+            color: #4a90e2;
+            text-decoration: none;
+        }
+
+        .msg p {
+            margin: 6px 0;
         }
     </style>
 </head>
 <body>
+<div class="form-container">
+    <h2>로그인</h2>
 
-<h2>로그인</h2>
+    <form th:action="@{/login}" method="post">
+        <label>Email: <input type="text" name="username" /></label>
+        <label>Password: <input type="password" name="password" /></label>
+        <button type="submit">로그인</button>
+    </form>
 
-<form th:action="@{/login}" method="post">
-    <label>
-        이메일: <input type="text" name="username" />
-    </label>
-    <label>
-        비밀번호: <input type="password" name="password" />
-    </label>
-    <button type="submit">로그인</button>
-</form>
+    <div class="msg" th:if="${param.error}">
+        <p style="color:red;">이메일 또는 비밀번호가 잘못되었습니다.</p>
+    </div>
 
-<div class="message" th:if="${param.error}">
-    <p style="color:red;">❌ 이메일 또는 비밀번호가 잘못되었습니다.</p>
+    <div class="msg" th:if="${param.logout}">
+        <p style="color:green;">로그아웃 되었습니다.</p>
+    </div>
+
+    <div class="msg">
+        <a th:href="@{/register}">회원가입</a>
+    </div>
 </div>
-
-<div class="message" th:if="${param.logout}">
-    <p style="color:green;">✅ 로그아웃 되었습니다.</p>
-</div>
-
-<p>
-    아직 계정이 없으신가요?
-    <a th:href="@{/register}">회원가입 하기</a>
-</p>
-
 </body>
 </html>

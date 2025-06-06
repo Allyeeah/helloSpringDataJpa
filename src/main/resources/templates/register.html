@@ -2,50 +2,97 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>회원가입</title>
+    <title>Register</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Segoe UI', sans-serif;
+            background: #f9f9f9;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .form-container {
+            background: white;
             padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            width: 350px;
         }
-        form {
-            margin-top: 20px;
+
+        h2 {
+            text-align: center;
+            margin-bottom: 24px;
         }
+
         label {
             display: block;
-            margin-bottom: 10px;
+            margin-bottom: 12px;
         }
+
+        input[type="text"],
+        input[type="password"] {
+            width: 100%;
+            padding: 10px;
+            margin-top: 6px;
+            margin-bottom: 16px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+        }
+
         button {
-            margin-top: 10px;
+            width: 100%;
+            padding: 12px;
+            background-color: #28a745;
+            border: none;
+            color: white;
+            border-radius: 6px;
+            font-size: 16px;
+            cursor: pointer;
         }
-        .message {
-            margin-top: 15px;
-            font-weight: bold;
+
+        button:hover {
+            background-color: #218838;
+        }
+
+        .msg {
+            margin-top: 12px;
+            text-align: center;
+        }
+
+        .msg a {
+            color: #28a745;
+            text-decoration: none;
+        }
+
+        .msg p {
+            margin: 6px 0;
+        }
+
+        .success {
+            color: green;
+            text-align: center;
         }
     </style>
 </head>
 <body>
+<div class="form-container">
+    <h2>회원가입</h2>
 
-<h2>회원가입</h2>
+    <form th:action="@{/register}" method="post">
+        <label>Email: <input type="text" name="email" /></label>
+        <label>Password: <input type="password" name="password" /></label>
+        <button type="submit">가입</button>
+    </form>
 
-<form th:action="@{/register}" method="post">
-    <label>
-        이메일: <input type="text" name="email" />
-    </label>
-    <label>
-        비밀번호: <input type="password" name="password" />
-    </label>
-    <button type="submit">가입</button>
-</form>
+    <div class="success" th:if="${success}">
+        <p th:text="${success}"></p>
+    </div>
 
-<div class="message" th:if="${success}">
-    <p th:text="${success}" style="color:green;">🎉 회원가입 성공!</p>
+    <div class="msg">
+        <a th:href="@{/login}">로그인으로 이동</a>
+    </div>
 </div>
-
-<p>
-    이미 계정이 있으신가요?
-    <a th:href="@{/login}">로그인 하기</a>
-</p>
-
 </body>
 </html>
