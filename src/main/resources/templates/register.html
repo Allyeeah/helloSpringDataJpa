@@ -2,23 +2,50 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Register</title>
+    <title>회원가입</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 40px;
+        }
+        form {
+            margin-top: 20px;
+        }
+        label {
+            display: block;
+            margin-bottom: 10px;
+        }
+        button {
+            margin-top: 10px;
+        }
+        .message {
+            margin-top: 15px;
+            font-weight: bold;
+        }
+    </style>
 </head>
 <body>
+
 <h2>회원가입</h2>
 
 <form th:action="@{/register}" method="post">
-    <label>Email: <input type="text" name="email" /></label><br/>
-    <label>Password: <input type="password" name="password" /></label><br/>
+    <label>
+        이메일: <input type="text" name="email" />
+    </label>
+    <label>
+        비밀번호: <input type="password" name="password" />
+    </label>
     <button type="submit">가입</button>
 </form>
 
-<div th:if="${success}">
-    <p th:text="${success}" style="color:green;"></p>
+<div class="message" th:if="${success}">
+    <p th:text="${success}" style="color:green;">🎉 회원가입 성공!</p>
 </div>
 
-<div>
-    <a th:href="@{/login}">로그인으로 이동</a>
-</div>
+<p>
+    이미 계정이 있으신가요?
+    <a th:href="@{/login}">로그인 하기</a>
+</p>
+
 </body>
 </html>
